@@ -4,7 +4,7 @@ Agent skill for [Chartworks](https://chartworks.dev) — chart rendering for AI 
 
 ## What it does
 
-Teaches the host agent to use the `chartworks` CLI through a three-stage flow: fetch the manual, fetch per-chart guides, render. The full skill content is in [SKILL.md](./SKILL.md).
+Teaches the host agent to use the `chartworks` CLI through a two-step flow: fetch one guide for every chart type it needs, then render. The full skill content is in [SKILL.md](./SKILL.md).
 
 ## Install
 
@@ -21,8 +21,7 @@ Or copy [SKILL.md](./SKILL.md) into the directory your agent watches for skills.
 Once installed, the agent will reach for these commands when asked to render a chart:
 
 ```bash
-npx chartworks manual                       # orientation, once per session
-npx chartworks guide column combo           # per-chart docs (variadic)
+npx chartworks guide line column table      # rules + guides for every type, one call
 npx chartworks render --spec spec.json      # render to PNG / SVG
 ```
 

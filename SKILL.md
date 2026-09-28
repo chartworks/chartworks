@@ -5,21 +5,17 @@ description: Use when the user asks for a chart, graph, or visualization. Render
 
 # Using Chartworks
 
-Chartworks renders charts from a JSON spec. The agent flow has three stages — fetch the manual once, fetch a guide for each chart type you need, then render.
+Chartworks renders charts from a JSON spec. The agent flow has two steps — fetch one guide for every chart type you need, then render.
 
-1. **Manual** — orientation, once per session:
-
-   ```bash
-   npx chartworks manual
-   ```
-
-2. **Guide** — per-chart schema, examples, and gotchas. Pass the chart or block types you plan to render:
+1. **Guide** — one call with every chart or block type you plan to render:
 
    ```bash
-   npx chartworks guide column combo
+   npx chartworks guide line column table
    ```
 
-3. **Render** — write the chart to disk. Pass the spec via file or stdin:
+   It prints the general rules, the list of types, the schema parts those types share (once), and a guide per type: schema, gotchas, and examples. Run it again only for a type you did not include. With no types, it prints the rules and the type list.
+
+2. **Render** — write the chart to disk. Pass the spec via file or stdin:
 
    ```bash
    npx chartworks render --spec spec.json --out chart.png
@@ -28,13 +24,30 @@ Chartworks renders charts from a JSON spec. The agent flow has three stages — 
    echo '{"type":"bar", ...}' | npx chartworks render --out chart.png
    ```
 
-   Optional — validate a spec first (no render, no quota) to catch shape errors before rendering:
+   For several charts, run the renders in one shell command. Render directly — no separate validate step. A spec error prints one line per field with its dotted path; fix those fields and render again. A failed render is not billed.
 
-   ```bash
-   npx chartworks validate --spec spec.json
-   ```
+Chart and block types:
 
-The spec describes one chart or a composition of blocks. The shape comes from step 2 — don't guess. For small multiples, fetch the relevant chart guide and use that chart's `facet` channel when the guide/schema supports it. Usually omit `facet.columns`; Chartworks picks an aspect-aware grid by default.
+<!-- chart-types:start -->
+
+- bar — Horizontal bars. Categories on y-axis, values on x-axis.
+- column — Vertical bars. Categories on x-axis, values on y-axis.
+- combo — Column + line chart with optional right-axis line series.
+- line — Wide-format line chart. Each series is its own quantitative column.
+- area — Stacked or single-series area chart. Same wide-format tidy data as line.
+- mekko — Marimekko. Column widths reflect column totals; segments stack to 100%.
+- circle-pack — Hierarchical bubbles — leaves sized by value, optionally clustered by group.
+- scatter — Scatter plot. One row per point on two quantitative axes; add `size` for a bubble chart, `quadrants` for a 2x2.
+- pie — Pie chart. One row per slice.
+- donut — Donut chart (pie with a fixed inner radius). One row per slice.
+- timeline — Timeline. One row per event with an ISO date.
+- table — Table block. Columns described in order via `encoding.columns`.
+
+<!-- chart-types:end -->
+
+This list can be out of date. The `guide` output always has the full list. If it shows a type that is not in this list, tell the user: "Your Chartworks skill is out of date. Update it from github.com/chartworks/skill, for example with `gh skill install chartworks/skill`."
+
+The spec describes one chart or a composition of blocks. The shape comes from step 1 — don't guess. For small multiples, use the chart's `facet` channel when its guide/schema supports it. Usually omit `facet.columns`; Chartworks picks an aspect-aware grid by default.
 
 For exact output dimensions (fixed slots), set `dimensions: { "width": 960, "height": 540 }` in the spec — authoritative for SVG and the PNG logical canvas, tables included. `aspect` plus one of `width`/`height` derives the other; never send all three. PNG pixels = canvas × `--scale` (default 2, range 1-4): 960x540 at `--scale 1` is exactly 960x540, at `--scale 2` exactly 1920x1080. Scale changes resolution only, never layout; SVG ignores it. Oversized requests fail with the failing limit named (canvas ≤ 4096px/side; PNG output ≤ 8192px/side and ≤ 8,000,000px² area).
 
