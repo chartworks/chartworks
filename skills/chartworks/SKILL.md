@@ -1,13 +1,13 @@
 ---
 name: chartworks
-description: Use when the user asks for a chart, graph, or visualization. Renders Chartworks charts, tables, and multi-chart compositions as PNG or SVG via the Chartworks CLI.
+description: Use when the user asks for a chart, graph, or visualization. Renders Chartworks charts and tables as PNG or SVG via the Chartworks CLI.
 ---
 
 # Using Chartworks
 
 Chartworks renders charts from a small JSON spec. The flow has two steps — fetch one guide for every chart type you need, then render.
 
-1. **Guide** — one call with every chart or block type you plan to render:
+1. **Guide** — one call with every chart type you plan to render:
 
    ```bash
    npx chartworks guide line column table
@@ -28,7 +28,7 @@ Chartworks renders charts from a small JSON spec. The flow has two steps — fet
 
 To share a chart as a link, `npx chartworks charts save --spec spec.json` stores it at a permanent public image URL. Use it only when the user wants a link — anyone with it can see the chart.
 
-Chart and block types:
+Chart types:
 
 <!-- chart-types:start -->
 
@@ -44,7 +44,6 @@ Chart and block types:
 - donut — Donut chart (pie with a fixed inner radius). One row per slice.
 - timeline — Timeline. One row per event with an ISO date.
 - table — Table block. Columns described in order via `encoding.columns`.
-- composition — Several charts or tables in one image under one title and footnotes. Ask for it with its block types.
 
 <!-- chart-types:end -->
 
