@@ -10,7 +10,7 @@ Chartworks renders charts from a small JSON spec. The flow has two steps — fet
 1. **Guide** — one call with every chart type you plan to render:
 
    ```bash
-   npx chartworks guide line column table
+   npx -y chartworks@latest guide line column table
    ```
 
    It prints the rules (including how to size a chart for a document or slide), the list of types, and a guide per type: schema, gotchas, and examples. Run it again only for a type you did not include. The spec shape comes from this output — don't guess.
@@ -18,15 +18,15 @@ Chartworks renders charts from a small JSON spec. The flow has two steps — fet
 2. **Render** — pass the spec via file or stdin:
 
    ```bash
-   npx chartworks render --spec spec.json --out chart.png
+   npx -y chartworks@latest render --spec spec.json --out chart.png
 
    # or pipe inline without touching the filesystem:
-   echo '{"type":"bar", ...}' | npx chartworks render --out chart.png
+   echo '{"type":"bar", ...}' | npx -y chartworks@latest render --out chart.png
    ```
 
    For several charts, run the renders in one shell command. Render directly — no separate validate step. A spec error prints one line per field with its dotted path; fix those fields and render again. A failed render is not billed. The command prints one JSON line with the output `path` and the render geometry (`canvas`, `inset`, `labelPx`) that the guide's sizing rules use.
 
-To share a chart as a link, `npx chartworks charts save --spec spec.json` stores it at a permanent public image URL. Use it only when the user wants a link — anyone with it can see the chart.
+To share a chart as a link, `npx -y chartworks@latest charts save --spec spec.json` stores it at a permanent public image URL. Use it only when the user wants a link — anyone with it can see the chart.
 
 Chart types:
 
@@ -47,6 +47,6 @@ Chart types:
 
 <!-- chart-types:end -->
 
-This list can be out of date. The `guide` output always has the full list. If it shows a type that is not in this list, tell the user: "Your Chartworks skill is out of date. Update it from github.com/chartworks/skill, for example with `gh skill update chartworks`."
+This list can be out of date. The `guide` output always has the full list. If it shows a type that is not in this list, tell the user: "Your Chartworks skill is out of date. Update it from github.com/chartworks/skills, for example with `npx skills update chartworks`."
 
-Themes, workspace assets (logos and images), saved charts, and sign-in (`npx chartworks auth login`) are all in `npx chartworks --help`. How to use them in a spec is in the guide.
+Themes, workspace assets (logos and images), saved charts, and sign-in (`npx -y chartworks@latest auth login`) are all in `npx -y chartworks@latest --help`. How to use them in a spec is in the guide.
