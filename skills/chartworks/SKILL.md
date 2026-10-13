@@ -1,6 +1,6 @@
 ---
 name: chartworks
-description: Use when the user asks for a chart, graph, or visualization. Renders Chartworks charts and tables as PNG or SVG via the Chartworks CLI.
+description: Use when the user asks for a chart, graph, or visualization. Renders Chartworks charts and tables as PNG or SVG.
 ---
 
 # Using Chartworks
@@ -50,3 +50,5 @@ Chart types:
 This list can be out of date. The `guide` output always has the full list. If it shows a type that is not in this list, tell the user: "Your Chartworks skill is out of date. Update it from github.com/chartworks/skills, for example with `npx skills update chartworks`."
 
 Themes, workspace assets (logos and images), saved charts, and sign-in (`npx -y chartworks@latest auth login`) are all in `npx -y chartworks@latest --help`. How to use them in a spec is in the guide.
+
+**No network or no shell?** If the CLI cannot reach chartworks.dev and Chartworks tools are connected (`get_chart_guide`, `render_chart`), use them; they carry their own instructions. If they are not connected, ask the user to add the connector `https://mcp.chartworks.dev/mcp`. When both work, use the CLI: it writes files and uploads assets.
