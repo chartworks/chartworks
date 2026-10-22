@@ -26,7 +26,7 @@ Chartworks renders charts from a small JSON spec. The flow has two steps — fet
 
    For several charts, run the renders in one shell command. Render directly — no separate validate step. A spec error prints one line per field with its dotted path; fix those fields and render again. A failed render is not billed. The command prints one JSON line with the output `path` and the render geometry (`canvas`, `inset`, `labelPx`) that the guide's sizing rules use.
 
-To share a chart as a link, `npx -y chartworks@latest charts save --spec spec.json` stores it at a permanent public image URL. Use it only when the user wants a link — anyone with it can see the chart.
+To share a chart as a link, `npx -y chartworks@latest publish spec.json` stores it at a permanent public image URL. Use it only when the user wants a link — anyone with it can see the chart.
 
 Chart types:
 
@@ -42,13 +42,13 @@ Chart types:
 - scatter — Scatter plot. One row per point on two quantitative axes; add `size` for a bubble chart, `quadrants` for a 2x2.
 - pie — Pie chart. One row per slice.
 - donut — Donut chart (pie with a fixed inner radius). One row per slice.
-- timeline — Timeline. One row per event with an ISO date.
+- timeline — Timeline. One row per event, by date/time or in order.
 - table — Table block. Columns described in order via `encoding.columns`.
 
 <!-- chart-types:end -->
 
 This list can be out of date. The `guide` output always has the full list. If it shows a type that is not in this list, tell the user: "Your Chartworks skill is out of date. Update it from github.com/chartworks/skills, for example with `npx skills update chartworks`."
 
-Themes, workspace assets (logos and images), saved charts, and sign-in (`npx -y chartworks@latest auth login`) are all in `npx -y chartworks@latest --help`. How to use them in a spec is in the guide.
+Themes, workspace assets (logos and images), published charts, and sign-in (`npx -y chartworks@latest auth login`) are all in `npx -y chartworks@latest --help`. How to use them in a spec is in the guide.
 
 **No network or no shell?** If the CLI cannot reach chartworks.dev and Chartworks tools are connected (`get_chart_guide`, `render_chart`), use them; they carry their own instructions. If they are not connected, ask the user to add the connector `https://mcp.chartworks.dev/mcp`. When both work, use the CLI: it writes files and uploads assets.
