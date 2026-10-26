@@ -24,7 +24,7 @@ Chartworks renders charts from a small JSON spec. The flow has two steps — fet
    echo '{"type":"bar", ...}' | npx -y chartworks@latest render --out chart.png
    ```
 
-   For several charts, run the renders in one shell command. Render directly — no separate validate step. A spec error prints one line per field with its dotted path; fix those fields and render again. A failed render is not billed. The command prints one JSON line with the output `path` and the render geometry (`canvas`, `inset`, `labelPx`) that the guide's sizing rules use.
+   For several charts, run the renders in one shell command. Render directly — no separate validate step. A spec or layout error prints one line per field with its dotted path and fix; apply the fixes and render again. A failed render is not billed. The command prints one JSON line with the output `path` and the render geometry (`canvas`, `inset`, `labelPx`) that the guide's sizing rules use. When the chart left something out (such as axis names), the line also has `notices`, each printed to stderr with its fix; tell the user, or apply the fix.
 
 To share a chart as a link, `npx -y chartworks@latest publish spec.json` stores it at a permanent public image URL. Use it only when the user wants a link — anyone with it can see the chart.
 
