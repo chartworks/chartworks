@@ -47,7 +47,7 @@ Chart types:
 
 <!-- chart-types:end -->
 
-This list can be out of date. The `guide` output always has the full list. If it shows a type that is not in this list, tell the user: "Your Chartworks skill is out of date. Update it from github.com/chartworks/skills, for example with `npx skills update chartworks`."
+This list can be out of date. The `guide` output always has the full list. If it shows a type that is not in this list, tell the user: "Your Chartworks skill is out of date. Update it from github.com/chartworks/chartworks, for example with `npx skills update chartworks`."
 
 Themes (including a brand kit read from a company's website), workspace assets (logos and images), published charts, and sign-in (`npx -y chartworks@latest auth login`) are all in `npx -y chartworks@latest --help`. How to use them in a spec is in the guide.
 
