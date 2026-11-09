@@ -43,6 +43,7 @@ Chart types:
 - pie — Pie chart. One row per slice.
 - donut — Donut chart (pie with a fixed inner radius). One row per slice.
 - timeline — Timeline. One row per event, by date/time or in order.
+- waterfall — Running total in steps: a start, the changes, subtotals and an end.
 - table — Table block. Columns described in order via `encoding.columns`.
 
 <!-- chart-types:end -->
